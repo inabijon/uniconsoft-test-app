@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
-@plugin "tailwindcss-primeui"; /* Importing Tailwind CSS and PrimeUI styles */
-@import 'primeicons/primeicons.css';
+@plugin "tailwindcss-primeui";
+@import "primeicons/primeicons.css";
 
 /*============================================================== */
 /*============================================================== */
@@ -114,185 +114,26 @@ PRIMARY COLORS
 /* Base theme variables */
 :root {
   --theme-transition: all 0.3s ease;
+  --page-zoom: 1;
+  --text-scale: 1;
 }
 
-/* Light Theme */
-.light {
-  --theme-primary: #36BFFA;
-  --theme-secondary: #6366f1;
-  --theme-background: #ffffff;
-  --theme-surface: #f8fafc;
-  --theme-text: #1e293b;
-  --theme-text-secondary: #64748b;
-  --theme-border: #e2e8f0;
-  --theme-success: #10b981;
-  --theme-warning: #f59e0b;
-  --theme-error: #ef4444;
-  --theme-info: #3b82f6;
+/* Better scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* Dark Theme */
-.dark {
-  --theme-primary: #36BFFA;
-  --theme-secondary: #818cf8;
-  --theme-background: #0f172a;
-  --theme-surface: #1e293b;
-  --theme-text: #f1f5f9;
-  --theme-text-secondary: #94a3b8;
-  --theme-border: #334155;
-  --theme-success: #34d399;
-  --theme-warning: #fbbf24;
-  --theme-error: #f87171;
-  --theme-info: #60a5fa;
+::-webkit-scrollbar-track {
+  background: var(--surface-ground, #f8f9fa);
+  border-radius: 4px;
 }
 
-/* Accessibility Theme - Rang ajrata olmaganlar uchun (Oq-Qora) */
-.accessibility {
-  --theme-primary: #000000;
-  --theme-secondary: #000000;
-  --theme-background: #ffffff;
-  --theme-surface: #f0f0f0;
-  --theme-text: #000000;
-  --theme-text-secondary: #000000;
-  --theme-border: #000000;
-  --theme-success: #000000;   /* Barcha ranglar qora */
-  --theme-warning: #000000;   /* Barcha ranglar qora */
-  --theme-error: #000000;     /* Barcha ranglar qora */
-  --theme-info: #000000;      /* Barcha ranglar qora */
+::-webkit-scrollbar-thumb {
+  background: var(--surface-400, #cbd5e1);
+  border-radius: 4px;
 }
 
-/* Theme-specific body styles */
-body {
-  background-color: var(--theme-background);
-  color: var(--theme-text);
-  transition: var(--theme-transition);
-}
-
-/* PrimeNG Theme Classes */
-.light-theme {
-  --p-primary-color: var(--theme-primary);
-  --p-surface-0: var(--theme-background);
-  --p-surface-50: var(--theme-surface);
-  --p-text-color: var(--theme-text);
-  --p-text-muted-color: var(--theme-text-secondary);
-  --p-border-color: var(--theme-border);
-}
-
-.dark-theme {
-  --p-primary-color: var(--theme-primary);
-  --p-surface-0: var(--theme-background);
-  --p-surface-50: var(--theme-surface);
-  --p-text-color: var(--theme-text);
-  --p-text-muted-color: var(--theme-text-secondary);
-  --p-border-color: var(--theme-border);
-}
-
-.accessibility-theme {
-  --p-primary-color: #000000;
-  --p-surface-0: #ffffff;
-  --p-surface-50: #f0f0f0;
-  --p-text-color: #000000;
-  --p-text-muted-color: #000000;
-  --p-border-color: #000000;
-  
-  /* Ko'zi ojizlar uchun maxsus sozlamalar - Oq-Qora rejim */
-  font-size: 20px !important;
-  line-height: 1.8 !important;
-  letter-spacing: 0.05em !important;
-  
-  /* Barcha ranglarni oq-qora qilish */
-  --p-success-color: #000000 !important;
-  --p-warning-color: #000000 !important;
-  --p-danger-color: #000000 !important;
-  --p-info-color: #000000 !important;
-}
-
-/* Accessibility theme specific styles - Oq-Qora rejim */
-.accessibility * {
-  font-weight: 700 !important;
-  border-width: 3px !important;
-  color: #000000 !important; /* Barcha matnlar qora */
-}
-
-.accessibility button,
-.accessibility .p-button {
-  min-height: 56px !important;
-  font-size: 20px !important;
-  font-weight: 900 !important;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border: 4px solid #000000 !important;
-}
-
-.accessibility button:hover,
-.accessibility .p-button:hover {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-}
-
-.accessibility input,
-.accessibility .p-inputtext {
-  min-height: 56px !important;
-  font-size: 20px !important;
-  border-width: 4px !important;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border-color: #000000 !important;
-}
-
-.accessibility select,
-.accessibility .p-dropdown {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border: 4px solid #000000 !important;
-}
-
-/* Barcha PrimeNG komponentlarini oq-qora qilish */
-.accessibility .p-card {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border: 4px solid #000000 !important;
-}
-
-.accessibility .p-panel {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-.accessibility .p-panel-header {
-  background-color: #f0f0f0 !important;
-  color: #000000 !important;
-  border-bottom: 4px solid #000000 !important;
-}
-
-.accessibility .p-message {
-  background-color: #ffffff !important;
-  color: #000000 !important;
-  border: 4px solid #000000 !important;
-}
-
-.accessibility .p-message-icon {
-  color: #000000 !important;
-}
-
-/* Focus styles for accessibility - Oq-Qora rejim */
-.accessibility *:focus {
-  outline: 6px solid #000000 !important;
-  outline-offset: 3px !important;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-/* High contrast borders for accessibility - Oq-Qora rejim */
-.accessibility .p-card,
-.accessibility .p-panel,
-.accessibility .p-accordion-content {
-  border: 4px solid #000000 !important;
-  background-color: #ffffff !important;
-  color: #000000 !important;
-}
-
-/* Theme transition animations */
-* {
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+::-webkit-scrollbar-thumb:hover {
+  background: var(--surface-500, #94a3b8);
 }

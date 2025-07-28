@@ -1,0 +1,105 @@
+<section class="flex items-center gap-4">
+  <div class="text-right flex items-center">
+    <div class="text-white font-bold text-4xl">{{ currentTime }}</div>
+  </div>
+
+  <!-- Gallery Button -->
+  <div class="text-right flex items-center">
+    <button
+      type="button"
+      class="hover:bg-white/20 p-1 rounded-full transition-colors cursor-pointer"
+      title="Galereyani ochish"
+    >
+      <img src="./images/icons/gallery.svg" alt="Gallery" />
+    </button>
+  </div>
+
+  <!-- Theme Switcher (Eye icon with menu) -->
+  <div class="text-right flex items-center">
+    <button
+      type="button"
+      #themeButton
+      class="hover:bg-white/20 p-1 rounded-full transition-colors cursor-pointer"
+      (click)="themeMenu.toggle($event)"
+      title="Rangni o'zgartirish"
+    >
+      <img src="./images/icons/eye.svg" alt="Theme" />
+    </button>
+
+    <p-overlayPanel #themeMenu>
+        <!-- Ko'rinish bo'limi -->
+        <div class="mb-4">
+          <h6 class="text-sm font-semibold mb-3 text-gray-800">Ko'rinish</h6>
+          <div class="flex gap-2 mb-4">
+            <!-- Light theme -->
+            <button
+              class="flex flex-col items-center justify-center w-16 h-12 rounded border-2 transition-all"
+              [class.border-blue-500]="getCurrentTheme().name === 'light'"
+              [class.border-gray-300]="getCurrentTheme().name !== 'light'"
+              (click)="setTheme('light')"
+            >
+              <div class="w-8 h-6 bg-blue-500 rounded-sm flex items-center justify-center">
+                <span class="text-white text-xs font-bold">A</span>
+              </div>
+            </button>
+
+            <!-- Dark theme -->
+            <button
+              class="flex flex-col items-center justify-center w-16 h-12 rounded border-2 transition-all"
+              [class.border-blue-500]="getCurrentTheme().name === 'dark'"
+              [class.border-gray-300]="getCurrentTheme().name !== 'dark'"
+              (click)="setTheme('dark')"
+            >
+              <div class="w-8 h-6 bg-gray-600 rounded-sm flex items-center justify-center">
+                <span class="text-white text-xs font-bold">A</span>
+              </div>
+            </button>
+
+            <!-- Accessibility theme -->
+            <button
+              class="flex flex-col items-center justify-center w-16 h-12 rounded border-2 transition-all"
+              [class.border-blue-500]="getCurrentTheme().name === 'accessibility'"
+              [class.border-gray-300]="getCurrentTheme().name !== 'accessibility'"
+              (click)="setTheme('accessibility')"
+            >
+              <div class="w-8 h-6 bg-black rounded-sm flex items-center justify-center">
+                <span class="text-white text-xs font-bold">A</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+
+    </p-overlayPanel>
+  </div>
+
+  <!-- Fullscreen Button -->
+  <div class="text-right flex items-center">
+    <button
+      type="button"
+      class="hover:bg-white/20 p-1 rounded-full transition-colors cursor-pointer"
+      (click)="toggleFullscreen()"
+      [title]="isFullscreen() ? 'Fullscreendan chiqish' : 'Fullscreen rejimga o\'tish'"
+    >
+      <img src="./images/icons/fullscreen.svg" alt="Fullscreen" />
+    </button>
+  </div>
+
+  <!-- Widget Panel Button -->
+  <div class="text-right flex items-center">
+    <button
+      type="button"
+      class="hover:bg-white/20 p-1 rounded-full transition-colors cursor-pointer"
+      title="Widget panelini ochish/yopish"
+    >
+      <img src="./images/icons/widget.svg" alt="Widgets" />
+    </button>
+  </div>
+
+  <p-avatar image="./images/icons/avatar.svg" shape="circle" size="large" />
+  <div class="text-white hidden md:block">
+    <div class="font-medium text-base">ABBOS XAZRATOV</div>
+  </div>
+
+  <app-language-switcher/>
+</section>

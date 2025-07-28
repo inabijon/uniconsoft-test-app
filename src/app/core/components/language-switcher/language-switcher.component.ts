@@ -1,13 +1,14 @@
-import { NgClass, UpperCasePipe } from '@angular/common';
+import { NgClass, UpperCasePipe, CommonModule } from '@angular/common';
 import { Component, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { BrowserStorageService } from '../../services/browser-storage.service';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-language-switcher',
-  imports: [MenuModule, ButtonModule, NgClass, UpperCasePipe],
+  imports: [MenuModule, ButtonModule, NgClass, UpperCasePipe, CommonModule],
   templateUrl: './language-switcher.component.html',
   styleUrl: './language-switcher.component.css',
 })
@@ -17,23 +18,36 @@ export class LanguageSwitcherComponent implements OnInit {
   @Input() appendTo: any;
   languages: MenuItem[] | undefined;
 
-  private browserService: BrowserStorageService = inject(BrowserStorageService);
+  private languageService: LanguageService = inject(LanguageService);
 
-  constructor() {}
+  // Tillar uchun ma'lumotlar
+  languageData: { [key: string]: { name: string; flag: string } } = {
+    'uz': { name: "O'zbekcha", flag: '/images/icons/uzb.svg' },
+    'ru': { name: 'Русский', flag: '/images/icons/rus.svg' },
+  };
 
   get currentLanguage() {
-    return this.browserService.getLocalItem('lang') || 'en';
+    return this.languageService.getLocalItem('lang') || this.languageService.getDefaultLang();
+  }
+
+  get currentLanguageData() {
+    return this.languageData[this.currentLanguage] || this.languageData['uz'];
   }
 
   ngOnInit(): void {
-    this.languages = this.browserService.availableLangs.map((lang: any) => {
-      return { label: lang, command: () => this.chooseLanguage(lang) };
+    this.languages = this.languageService.availableLanguages.map((lang: any) => {
+      const langData = this.languageData[lang] || { name: lang, flag: '🌐' };
+      return {
+        label: langData.name,
+        icon: langData.flag,
+        code: lang,
+        command: () => this.chooseLanguage(lang)
+      };
     });
   }
 
   chooseLanguage(code: string) {
-    this.browserService.setLocalItem('lang', code);
-    this.browserService.loadLanguage(code).subscribe(() => {});
+    this.languageService.setLanguage(code);
   }
 
   toggleMenu() {

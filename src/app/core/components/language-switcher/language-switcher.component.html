@@ -2,21 +2,25 @@
   #menu
   [model]="languages"
   [popup]="true"
-  class="language"
+  class="language-menu"
   [appendTo]="appendTo || actions"
   [baseZIndex]="99999"
   [autoZIndex]="true"
   (onHide)="menu.visible = false"
-  styleClass="bg-white text-slate-800 w-12"
+  styleClass="bg-primary-500 shadow-lg border border-gray-200 rounded-lg min-w-48"
 >
   <ng-template let-item pTemplate="item">
     <a
       [attr.tabindex]="-1"
-      class="align-items-center group flex cursor-pointer gap-4 p-3"
+      class="flex items-center gap-3 p-3 hover:bg-blue-50 cursor-pointer transition-colors duration-200"
+      (click)="item.command()"
     >
-      <span class="text-main-dark text-base">
-        {{ item.label | uppercase }}</span
-      >
+      <img
+        [src]="item.icon"
+        [alt]="item.label"
+        class="w-6 h-6 object-contain"
+      />
+      <span class="text-gray-700 font-medium">{{ item.label }}</span>
     </a>
   </ng-template>
 </p-menu>
@@ -24,13 +28,17 @@
 <button
   #languageButton
   (click)="menu.toggle($event)"
-  class="border-main-dark-10 flex items-center justify-center gap-2 rounded-md border bg-white px-2 py-1.5"
+  class="flex items-center gap-2 bg-primary-500 text-white px-4 py-3 justify-center min-w-[160px] rounded-full transition-colors duration-200 shadow-sm"
 >
-  <p class="text-main-dark mr-0 text-base font-semibold sm:mr-1">
-    {{ currentLanguage | uppercase }}
-  </p>
+  <img
+    [src]="currentLanguageData.flag"
+    [alt]="currentLanguageData.name"
+    class="w-6 h-6 object-contain"
+  />
+
+  <span class="font-medium text-base">{{ currentLanguageData.name }}</span>
   <i
     [ngClass]="menu.visible ? 'pi pi-angle-up' : 'pi pi-angle-down'"
-    class="text-main-dark-50 hidden text-lg transition-all duration-300 sm:flex"
+    class="text-white text-sm transition-transform duration-300"
   ></i>
 </button>

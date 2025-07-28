@@ -18,7 +18,7 @@ export class LanguageService {
     /**
      * Sets the active language for the application.
      * @param lang - The language code to set as active.
-     */ 
+     */
     setLanguage(lang: string): void {
         this.translocoService.setActiveLang(lang);
         this.browserStorageService.setLocalItem('lang', lang);
@@ -67,5 +67,10 @@ export class LanguageService {
         } else {
             this.setLanguage(this.getDefaultLang());
         }
+    }
+
+    // GET LOCAL ITEM
+    getLocalItem(key: string): string | null {
+        return this.browserStorageService.getLocalItem(key);
     }
 }

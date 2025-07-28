@@ -1,16 +1,18 @@
 import { Routes } from '@angular/router';
+import LoginComponent from './core/components/auth/login/login.component';
+import { LayoutComponent } from './core/components/layout/layout.component';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./features/components/theme-demo/theme-demo.component').then(m => m.ThemeDemoComponent)
+    component: LayoutComponent
   },
   {
-    path: 'theme-demo',
-    loadComponent: () => import('./features/components/theme-demo/theme-demo.component').then(m => m.ThemeDemoComponent)
+    path: 'login',
+    component: LoginComponent,
   },
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];

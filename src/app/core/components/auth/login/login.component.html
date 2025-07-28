@@ -11,13 +11,13 @@
           class="flex w-full flex-col gap-y-4"
         >
           <h2 class="text-primary-900 mb-2 text-lg font-bold">
-            {{ 'login.register' | transloco }}
+            {{ "login.register" | transloco }}
           </h2>
           <div class="flex flex-col gap-2">
             <label
               for="username"
               class="text-primary-950 text-sm font-medium"
-              >{{ 'login.login' | transloco }}</label
+              >{{ "login.login" | transloco }}</label
             >
             <p-iconfield iconPosition="left">
               <p-inputicon class="pi pi-user text-main-dark-50"></p-inputicon>
@@ -36,7 +36,7 @@
               <label
                 for="password"
                 class="text-primary-950 text-sm font-medium"
-                >{{ 'login.password' | transloco }}</label
+                >{{ "login.password" | transloco }}</label
               >
               <p-iconfield>
                 <p-inputicon class="pi pi-lock text-main-dark-40"></p-inputicon>
@@ -60,23 +60,13 @@
             </div>
           }
 
-          <!-- <label for="rememberMe" class="flex cursor-pointer items-center">
-            <p-checkbox
-              inputId="rememberMe"
-              formControlName="rememberMe"
-              [binary]="true"
-            ></p-checkbox>
-            <span class="text-main-dark-60 mt-1 ml-2 text-sm">{{
-              'login.rememberMe' | transloco
-            }}</span>
-          </label> -->
           <button
             pButton
             type="submit"
             [disabled]="loginForm.invalid"
             class="bg-main-primary w-full rounded-lg py-3 font-semibold text-white focus:outline-none"
           >
-            {{ 'login.submit' | transloco }}
+            {{ "login.submit" | transloco }}
             <i class="pi pi-arrow-right"></i>
           </button>
         </form>
@@ -87,16 +77,11 @@
     <section
       class="bg-main-gray-400 relative hidden items-center justify-center overflow-hidden md:flex"
     >
-      <app-language-switcher
-        [appendTo]="'body'"
-        class="absolute top-4 right-4 z-10"
-      ></app-language-switcher>
       <img
-        src="images/svg/login-bg.svg"
+        src="images/login/blue_bg.jpg"
         alt="Decorative background for login page"
-        class="h-[320px] w-[320px] object-cover"
+        class="object-cover object-top-right"
       />
-      <div class="absolute bottom-0 h-1/2 w-full backdrop-blur-2xl"></div>
     </section>
   </div>
 </main>

@@ -1,0 +1,18 @@
+  :host {
+      display: block;
+    }
+
+    ::ng-deep .p-sidebar {
+      background: rgba(30, 58, 114, 0.95) !important;
+      backdrop-filter: blur(16px) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    ::ng-deep .p-sidebar .p-sidebar-header {
+      background: transparent !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
+    }
+
+    ::ng-deep .p-sidebar .p-sidebar-close {
+      color: white !important;
+    }
