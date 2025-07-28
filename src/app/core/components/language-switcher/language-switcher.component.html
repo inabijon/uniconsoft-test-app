@@ -1,0 +1,36 @@
+<p-menu
+  #menu
+  [model]="languages"
+  [popup]="true"
+  class="language"
+  [appendTo]="appendTo || actions"
+  [baseZIndex]="99999"
+  [autoZIndex]="true"
+  (onHide)="menu.visible = false"
+  styleClass="bg-white text-slate-800 w-12"
+>
+  <ng-template let-item pTemplate="item">
+    <a
+      [attr.tabindex]="-1"
+      class="align-items-center group flex cursor-pointer gap-4 p-3"
+    >
+      <span class="text-main-dark text-base">
+        {{ item.label | uppercase }}</span
+      >
+    </a>
+  </ng-template>
+</p-menu>
+
+<button
+  #languageButton
+  (click)="menu.toggle($event)"
+  class="border-main-dark-10 flex items-center justify-center gap-2 rounded-md border bg-white px-2 py-1.5"
+>
+  <p class="text-main-dark mr-0 text-base font-semibold sm:mr-1">
+    {{ currentLanguage | uppercase }}
+  </p>
+  <i
+    [ngClass]="menu.visible ? 'pi pi-angle-up' : 'pi pi-angle-down'"
+    class="text-main-dark-50 hidden text-lg transition-all duration-300 sm:flex"
+  ></i>
+</button>

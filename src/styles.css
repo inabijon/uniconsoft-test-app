@@ -1,1 +1,298 @@
 /* You can add global styles to this file, and also import other style files */
+@import "tailwindcss";
+@plugin "tailwindcss-primeui"; /* Importing Tailwind CSS and PrimeUI styles */
+@import 'primeicons/primeicons.css';
+
+/*============================================================== */
+/*============================================================== */
+/*================== FONTS ================================ */
+/*============================================================== */
+/*============================================================== */
+
+@font-face {
+  font-family: 'Cairo';
+  src: url('/fonts/Cairo/static/Cairo-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat/static/Montserrat-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat/static/Montserrat-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat/static/Montserrat-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat/static/Montserrat-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat/static/Montserrat-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*============================================================== */
+/*============================================================== */
+/*================== CUSTOMS  ================================== */
+/*============================================================== */
+/*============================================================== */
+
+/*
+PRIMARY COLORS
+
+50: '#f2f2ff',
+100: '#dcdcff',
+200: '#b9baff',
+300: '#9697ff',
+400: '#7374ff',
+500: '#615FFF', // Asosiy rang
+600: '#504fdb',
+700: '#403fb7',
+800: '#302f93',
+900: '#201f6f',
+950: '#14144f' */
+
+@theme {
+  --font-cairo: 'Montserrat', sans-serif;
+  /* CUSTOM COLORS */
+  --color-main-primary: #615fff;
+  --color-main-primary-600: #504fdb;
+  --color-main-primary-700: #403fb7;
+
+  --color-main-dark: #181818;
+  --color-main-dark-60: rgba(24, 24, 24, 0.6);
+  --color-main-dark-40: rgba(24, 24, 24, 0.4);
+  --color-main-dark-50: rgba(24, 24, 24, 0.5);
+  --color-main-dark-10: rgba(24, 24, 24, 0.1);
+  --color-main-gray-400: #fafafa;
+  --color-main-gray-500: #f5f5f5;
+  --color-main-gray-550: #f0f0f0;
+  --color-main-gray-600: #ececec;
+
+  --color-main-green-50: #f6faf6;
+  --color-main-green-60: #e3f1e3;
+  --color-main-green-500: #43a047;
+
+  --color-main-red-50: #fef6f5;
+  --color-main-red-60: #fde3e1;
+  --color-main-red-500: #f44336;
+
+  --color-main-orange: #ff9800;
+  --color-main-violent: #734ac5;
+}
+
+/*============================================================== */
+/*================== THEME STYLES ========================== */
+/*============================================================== */
+
+/* Base theme variables */
+:root {
+  --theme-transition: all 0.3s ease;
+}
+
+/* Light Theme */
+.light {
+  --theme-primary: #36BFFA;
+  --theme-secondary: #6366f1;
+  --theme-background: #ffffff;
+  --theme-surface: #f8fafc;
+  --theme-text: #1e293b;
+  --theme-text-secondary: #64748b;
+  --theme-border: #e2e8f0;
+  --theme-success: #10b981;
+  --theme-warning: #f59e0b;
+  --theme-error: #ef4444;
+  --theme-info: #3b82f6;
+}
+
+/* Dark Theme */
+.dark {
+  --theme-primary: #36BFFA;
+  --theme-secondary: #818cf8;
+  --theme-background: #0f172a;
+  --theme-surface: #1e293b;
+  --theme-text: #f1f5f9;
+  --theme-text-secondary: #94a3b8;
+  --theme-border: #334155;
+  --theme-success: #34d399;
+  --theme-warning: #fbbf24;
+  --theme-error: #f87171;
+  --theme-info: #60a5fa;
+}
+
+/* Accessibility Theme - Rang ajrata olmaganlar uchun (Oq-Qora) */
+.accessibility {
+  --theme-primary: #000000;
+  --theme-secondary: #000000;
+  --theme-background: #ffffff;
+  --theme-surface: #f0f0f0;
+  --theme-text: #000000;
+  --theme-text-secondary: #000000;
+  --theme-border: #000000;
+  --theme-success: #000000;   /* Barcha ranglar qora */
+  --theme-warning: #000000;   /* Barcha ranglar qora */
+  --theme-error: #000000;     /* Barcha ranglar qora */
+  --theme-info: #000000;      /* Barcha ranglar qora */
+}
+
+/* Theme-specific body styles */
+body {
+  background-color: var(--theme-background);
+  color: var(--theme-text);
+  transition: var(--theme-transition);
+}
+
+/* PrimeNG Theme Classes */
+.light-theme {
+  --p-primary-color: var(--theme-primary);
+  --p-surface-0: var(--theme-background);
+  --p-surface-50: var(--theme-surface);
+  --p-text-color: var(--theme-text);
+  --p-text-muted-color: var(--theme-text-secondary);
+  --p-border-color: var(--theme-border);
+}
+
+.dark-theme {
+  --p-primary-color: var(--theme-primary);
+  --p-surface-0: var(--theme-background);
+  --p-surface-50: var(--theme-surface);
+  --p-text-color: var(--theme-text);
+  --p-text-muted-color: var(--theme-text-secondary);
+  --p-border-color: var(--theme-border);
+}
+
+.accessibility-theme {
+  --p-primary-color: #000000;
+  --p-surface-0: #ffffff;
+  --p-surface-50: #f0f0f0;
+  --p-text-color: #000000;
+  --p-text-muted-color: #000000;
+  --p-border-color: #000000;
+  
+  /* Ko'zi ojizlar uchun maxsus sozlamalar - Oq-Qora rejim */
+  font-size: 20px !important;
+  line-height: 1.8 !important;
+  letter-spacing: 0.05em !important;
+  
+  /* Barcha ranglarni oq-qora qilish */
+  --p-success-color: #000000 !important;
+  --p-warning-color: #000000 !important;
+  --p-danger-color: #000000 !important;
+  --p-info-color: #000000 !important;
+}
+
+/* Accessibility theme specific styles - Oq-Qora rejim */
+.accessibility * {
+  font-weight: 700 !important;
+  border-width: 3px !important;
+  color: #000000 !important; /* Barcha matnlar qora */
+}
+
+.accessibility button,
+.accessibility .p-button {
+  min-height: 56px !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 4px solid #000000 !important;
+}
+
+.accessibility button:hover,
+.accessibility .p-button:hover {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.accessibility input,
+.accessibility .p-inputtext {
+  min-height: 56px !important;
+  font-size: 20px !important;
+  border-width: 4px !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #000000 !important;
+}
+
+.accessibility select,
+.accessibility .p-dropdown {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 4px solid #000000 !important;
+}
+
+/* Barcha PrimeNG komponentlarini oq-qora qilish */
+.accessibility .p-card {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 4px solid #000000 !important;
+}
+
+.accessibility .p-panel {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+.accessibility .p-panel-header {
+  background-color: #f0f0f0 !important;
+  color: #000000 !important;
+  border-bottom: 4px solid #000000 !important;
+}
+
+.accessibility .p-message {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: 4px solid #000000 !important;
+}
+
+.accessibility .p-message-icon {
+  color: #000000 !important;
+}
+
+/* Focus styles for accessibility - Oq-Qora rejim */
+.accessibility *:focus {
+  outline: 6px solid #000000 !important;
+  outline-offset: 3px !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* High contrast borders for accessibility - Oq-Qora rejim */
+.accessibility .p-card,
+.accessibility .p-panel,
+.accessibility .p-accordion-content {
+  border: 4px solid #000000 !important;
+  background-color: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Theme transition animations */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}

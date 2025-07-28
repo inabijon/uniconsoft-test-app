@@ -1,0 +1,102 @@
+<main class="flex h-screen w-full">
+  <div class="grid w-full grid-cols-1 md:grid-cols-2">
+    <!-- Login Form Section -->
+    <section class="bg-main-gray-400 flex items-center justify-center">
+      <div
+        class="border-main-gray-600 m-4 w-full max-w-[400px] rounded-xl border bg-white p-8 shadow-sm"
+      >
+        <form
+          [formGroup]="loginForm"
+          (ngSubmit)="submit()"
+          class="flex w-full flex-col gap-y-4"
+        >
+          <h2 class="text-primary-900 mb-2 text-lg font-bold">
+            {{ 'login.register' | transloco }}
+          </h2>
+          <div class="flex flex-col gap-2">
+            <label
+              for="username"
+              class="text-primary-950 text-sm font-medium"
+              >{{ 'login.login' | transloco }}</label
+            >
+            <p-iconfield iconPosition="left">
+              <p-inputicon class="pi pi-user text-main-dark-50"></p-inputicon>
+              <input
+                pInputText
+                id="username"
+                formControlName="username"
+                [placeholder]="'login.input_login' | transloco"
+                class="border-main-gray-100 text-main-gray-400 w-full rounded-lg border p-3 focus:border-gray-400!"
+              />
+            </p-iconfield>
+          </div>
+
+          @if (isAdmin) {
+            <div class="flex flex-col gap-2">
+              <label
+                for="password"
+                class="text-primary-950 text-sm font-medium"
+                >{{ 'login.password' | transloco }}</label
+              >
+              <p-iconfield>
+                <p-inputicon class="pi pi-lock text-main-dark-40"></p-inputicon>
+                <input
+                  pInputText
+                  id="password"
+                  formControlName="password"
+                  [placeholder]="'login.input_password' | transloco"
+                  [type]="passwordVisible ? 'text' : 'password'"
+                  class="border-main-gray-100 text-main-gray-400 w-full rounded-lg border p-3 focus:border-gray-400!"
+                />
+                <p-inputicon
+                  [class]="passwordVisible ? 'pi pi-eye-slash' : 'pi pi-eye'"
+                  (click)="togglePasswordVisibility()"
+                  (keyup)="$event.key === 'Enter' && togglePasswordVisibility()"
+                  class="text-main-dark-40 cursor-pointer"
+                  tabindex="0"
+                  role="button"
+                ></p-inputicon>
+              </p-iconfield>
+            </div>
+          }
+
+          <!-- <label for="rememberMe" class="flex cursor-pointer items-center">
+            <p-checkbox
+              inputId="rememberMe"
+              formControlName="rememberMe"
+              [binary]="true"
+            ></p-checkbox>
+            <span class="text-main-dark-60 mt-1 ml-2 text-sm">{{
+              'login.rememberMe' | transloco
+            }}</span>
+          </label> -->
+          <button
+            pButton
+            type="submit"
+            [disabled]="loginForm.invalid"
+            class="bg-main-primary w-full rounded-lg py-3 font-semibold text-white focus:outline-none"
+          >
+            {{ 'login.submit' | transloco }}
+            <i class="pi pi-arrow-right"></i>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Image Section -->
+    <section
+      class="bg-main-gray-400 relative hidden items-center justify-center overflow-hidden md:flex"
+    >
+      <app-language-switcher
+        [appendTo]="'body'"
+        class="absolute top-4 right-4 z-10"
+      ></app-language-switcher>
+      <img
+        src="images/svg/login-bg.svg"
+        alt="Decorative background for login page"
+        class="h-[320px] w-[320px] object-cover"
+      />
+      <div class="absolute bottom-0 h-1/2 w-full backdrop-blur-2xl"></div>
+    </section>
+  </div>
+</main>

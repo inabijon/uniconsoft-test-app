@@ -2,6 +2,61 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
 
+## Theme System
+
+Ushbu loyiha 3 xil theme'ni qo'llab-quvvatlaydi:
+
+### Theme turlari:
+- **Light Theme (Yorug')** - Standart yorug' theme
+- **Dark Theme (Qorong'i)** - Qorong'i rejim
+- **Accessibility Theme (Ko'zi ojizlar uchun)** - Yuqori kontrast va katta matn o'lchamlari
+
+### Xususiyatlari:
+- Avtomatik theme saqlash (localStorage)
+- Tizim ranglarini aniqlash
+- PrimeNG va Tailwind CSS bilan integratsiya
+- Responsive design
+- Accessibility standartlariga muvofiq
+
+### Foydalanish:
+
+1. **ThemeService** - Asosiy theme boshqaruv xizmati
+2. **ThemeSwitcherComponent** - Theme almashtirish komponenti
+3. CSS Variables - Barcha ranglar uchun
+4. Tailwind Classes - Theme-aware style'lar
+
+```typescript
+// ThemeService'dan foydalanish
+import { ThemeService } from './core/services/theme.service';
+
+constructor(private themeService: ThemeService) {}
+
+// Theme o'rnatish
+this.themeService.setTheme('dark');
+
+// Joriy theme olish
+const currentTheme = this.themeService.getCurrentTheme();
+
+// Theme tekshirish
+const isDark = this.themeService.isDarkTheme();
+```
+
+### CSS Variables:
+```css
+/* Har qanday joyda ishlatish mumkin */
+background-color: var(--theme-background);
+color: var(--theme-text);
+border-color: var(--theme-border);
+```
+
+### Tailwind Classes:
+```html
+<!-- Theme-aware ranglar -->
+<div class="bg-background text-text border-border">
+  <button class="bg-primary text-white">Primary Button</button>
+</div>
+```
+
 ## Development server
 
 To start a local development server, run:
