@@ -1,0 +1,68 @@
+.notes-header {
+  background: linear-gradient(84.43deg, rgba(242, 245, 250, 0.765) 14.91%, rgba(241, 244, 248, 0.5865) 47.7%, rgba(255, 255, 255, 0.6885) 67.51%, rgba(251, 254, 255, 0.85) 95.19%);
+  /* Background blur/lg light */
+  backdrop-filter: blur(12px);
+}
+
+.placeholder {
+  position: relative;
+}
+
+.active {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+[contenteditable]:focus {
+  outline: none;
+}
+
+/* Text yo'nalishi va cursor uchun */
+[contenteditable] {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+  writing-mode: horizontal-tb !important;
+  caret-color: #2563eb;
+}
+
+[contenteditable] * {
+  direction: ltr !important;
+  text-align: left !important;
+  unicode-bidi: normal !important;
+}
+
+/* Rasm uchun */
+[contenteditable] img {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Placeholder uchun maxsus stillar */
+.absolute.pointer-events-none {
+  z-index: 1;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Editable div bo'sh bo'lganda placeholder ko'rsatish */
+[contenteditable]:empty:not(:focus)::before {
+  content: "Take a note...";
+  color: #9ca3af;
+  pointer-events: none;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+
+/* Custom styles for ordered lists */
+ol {
+  padding-left: 20px;
+  margin: 10px 0;
+}
+
+ol li {
+  margin: 5px 0;
+  list-style-type: decimal;
+}

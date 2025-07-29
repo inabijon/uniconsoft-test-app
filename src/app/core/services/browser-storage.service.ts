@@ -4,27 +4,21 @@ import { Injectable } from "@angular/core";
     providedIn: 'root'
 })
 export class BrowserStorageService {
-    private storage: Storage;
-
-    constructor() {
-        this.storage = localStorage; // default to localStorage
-    }
-
     // LocalStorage
     getLocalItem(key: string): string | null {
-        return this.storage.getItem(key);
+        return localStorage.getItem(key);
     }
 
     setLocalItem(key: string, value: string): void {
-        this.storage.setItem(key, value);
+        localStorage.setItem(key, value);
     }
 
     removeLocalItem(key: string): void {
-        this.storage.removeItem(key);
+        localStorage.removeItem(key);
     }
 
     clearLocalStorage(): void {
-        this.storage.clear();
+        localStorage.clear();
     }
 
     // SessionStorage

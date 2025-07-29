@@ -89,11 +89,57 @@
   <div class="text-right flex items-center">
     <button
       type="button"
+      #widgetButton
       class="hover:bg-white/20 p-1 rounded-full transition-colors cursor-pointer"
-      title="Widget panelini ochish/yopish"
+      (click)="widgetMenu.toggle($event)"
+      title="Widget panelini sozlash"
     >
       <img src="./images/icons/widget.svg" alt="Widgets" />
     </button>
+
+    <p-overlayPanel #widgetMenu [style]="{ width: '300px' }">
+      <div class="p-4">
+        <!-- Right Sidebar Toggle -->
+        <div class="mb-4 pb-4 border-b border-gray-200">
+          <h6 class="text-sm font-semibold mb-3 text-gray-800">Widget Panel</h6>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-gray-600">Widget panelini ko'rsatish</span>
+            <p-checkbox
+              [ngModel]="widgetService.getRightSidebarVisibility()"
+              [binary]="true"
+              (onChange)="toggleRightSidebar()"
+            ></p-checkbox>
+          </div>
+        </div>
+
+        <!-- Widget Configuration -->
+        <div class="mb-4">
+          <h6 class="text-sm font-semibold mb-3 text-gray-800">Widgetlar</h6>
+          <div class="space-y-3">
+            @for (widget of widgetService.getSortedWidgets(); track widget.id) {
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-gray-600">{{ widget.name }}</span>
+                <p-checkbox
+                  [ngModel]="widget.isVisible"
+                  [binary]="true"
+                  (onChange)="toggleWidget(widget.id)"
+                ></p-checkbox>
+              </div>
+            }
+          </div>
+        </div>
+
+        <!-- Reset Button -->
+        <div class="pt-3 border-t border-gray-200">
+          <button
+            class="w-full px-3 py-2 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            (click)="resetWidgets(); widgetMenu.hide()"
+          >
+            Standart holatga qaytarish
+          </button>
+        </div>
+      </div>
+    </p-overlayPanel>
   </div>
 
   <p-avatar image="./images/icons/avatar.svg" shape="circle" size="large" />

@@ -6,8 +6,11 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { DialogModule } from 'primeng/dialog';
 import { CommonModule } from '@angular/common';
 import { ThemeService, ThemeType } from '../../../../services/theme.service';
+import { WidgetService } from '../../../../services/widget.service';
 import { MenuItem } from 'primeng/api';
 import { LanguageSwitcherComponent } from "../../../language-switcher/language-switcher.component";
+import { CheckboxModule } from 'primeng/checkbox';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-header-action-bar',
@@ -18,7 +21,9 @@ import { LanguageSwitcherComponent } from "../../../language-switcher/language-s
     ButtonModule,
     OverlayPanelModule,
     DialogModule,
-    LanguageSwitcherComponent
+    LanguageSwitcherComponent,
+    CheckboxModule,
+    FormsModule
 ],
   templateUrl: './header-action-bar.component.html',
   styleUrl: './header-action-bar.component.css'
@@ -33,7 +38,9 @@ export class HeaderActionBarComponent {
   isWidgetPanelOpen = signal(false);
 
   // Theme menu items
-  themeMenuItems: MenuItem[] = [];  constructor(private themeService: ThemeService) {
+  themeMenuItems: MenuItem[] = [];
+
+  constructor(private themeService: ThemeService, public widgetService: WidgetService) {
     this.updateTime();
     setInterval(() => this.updateTime(), 1000);
     this.initializeThemeMenu();
@@ -117,6 +124,19 @@ export class HeaderActionBarComponent {
     buttons.forEach(button => {
       button.removeAttribute('aria-label');
     });
+  }
+
+  // Widget functionality
+  toggleRightSidebar() {
+    this.widgetService.toggleRightSidebar();
+  }
+
+  toggleWidget(widgetId: string) {
+    this.widgetService.toggleWidget(widgetId);
+  }
+
+  resetWidgets() {
+    this.widgetService.resetToDefault();
   }
 
 }

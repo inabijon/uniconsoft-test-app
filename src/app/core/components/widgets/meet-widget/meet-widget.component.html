@@ -1,0 +1,22 @@
+<section class="w-full rounded-2xl px-4 py-5 bg-white overflow-hidden">
+  <section class="block">
+    <img src="./images/logo/meet.svg" alt="Meet Logo" class="w-32" />
+  </section>
+
+  <section class="flex items-center justify-between gap-2">
+    <p-button
+      label="Create"
+      icon="pi pi-plus"
+      class="w-full"
+      styleClass="w-full"
+      (onClick)="createMeeting()"
+    ></p-button>
+    <p-button
+      label="Join"
+      icon="pi pi-video"
+      class="w-full"
+      styleClass="w-full"
+      (onClick)="joinMeeting()"
+    ></p-button>
+  </section>
+</section>

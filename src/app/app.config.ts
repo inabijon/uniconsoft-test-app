@@ -9,6 +9,7 @@ import { provideTransloco } from '@jsverse/transloco';
 import { providePrimeNG } from 'primeng/config';
 import { LightThemePreset } from './primeng-custom-theme';
 import Aura from '@primeuix/themes/aura';
+import { BrowserStorageService } from './core/services/browser-storage.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,5 +37,7 @@ export const appConfig: ApplicationConfig = {
         },
       },
     }),
+
+    BrowserStorageService,
   ]
 };

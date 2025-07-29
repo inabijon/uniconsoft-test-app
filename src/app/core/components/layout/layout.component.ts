@@ -2,20 +2,30 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AvatarModule } from 'primeng/avatar';
 import { SidebarModule } from 'primeng/sidebar';
-import { GlobalSearchBarComponent } from "./header/global-search-bar/global-search-bar.component";
-import { HeaderComponent } from "./header/header.component";
+import { ButtonModule } from 'primeng/button';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { LayoutService } from '../../services/layout.service';
+import { WidgetService } from '../../services/widget.service';
+import { WidgetsComponent } from "../widgets/widgets.component";
+import { RightSidebarSettingsComponent } from "./right-sidebar-settings/right-sidebar-settings.component";
 
 @Component({
   selector: 'app-layout',
-  imports: [AvatarModule, SidebarModule, RouterOutlet, GlobalSearchBarComponent, HeaderComponent],
+  imports: [
+    AvatarModule,
+    SidebarModule,
+    ButtonModule,
+    RouterOutlet,
+    HeaderComponent,
+    SidebarComponent,
+    WidgetsComponent,
+    RightSidebarSettingsComponent
+],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  styleUrl: './layout.component.css',
 })
 export class LayoutComponent {
- sidebarVisible = signal(false);
 
-  toggleSidebar() {
-    this.sidebarVisible.set(!this.sidebarVisible());
-  }
-
+  constructor(public layoutService: LayoutService, public widgetService: WidgetService) {}
 }

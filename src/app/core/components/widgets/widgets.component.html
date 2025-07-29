@@ -1,0 +1,36 @@
+<div class="flex flex-col h-full p-3 gap-3">
+  <!-- Calendar Widget -->
+  @if (widgetService.isWidgetVisible("calendar")) {
+    <section>
+      <app-calendar-widget />
+    </section>
+  }
+
+  <!-- Weather Widget -->
+  @if (widgetService.isWidgetVisible("weather")) {
+    <section>
+      <app-weather-widget />
+    </section>
+  }
+
+  <!-- Tug'ilgan kunlar Widget -->
+  @if (widgetService.isWidgetVisible("birthday")) {
+    <section>
+      <app-birthday-widget />
+    </section>
+  }
+
+  <!-- Microsoft Teams Widget -->
+  @if (widgetService.isWidgetVisible("meet")) {
+    <section>
+      <app-meet-widget />
+    </section>
+  }
+
+  <!-- Notes Widget -->
+  @if (widgetService.isWidgetVisible("notes")) {
+    <section class="pb-5">
+      <app-notes-widget />
+    </section>
+  }
+</div>

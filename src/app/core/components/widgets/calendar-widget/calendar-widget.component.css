@@ -1,0 +1,59 @@
+:host {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Custom scrollbar for consistency */
+:host::-webkit-scrollbar {
+  display: none;
+}
+
+/* Smooth transitions for all interactive elements */
+button {
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover effects for navigation buttons */
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+/* Disabled state for navigation buttons */
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Focus states for accessibility */
+button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Animation for selected date */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.selected-day {
+  animation: pulse 1s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .calendar-widget {
+    padding: 0.75rem;
+  }
+
+  .day-button {
+    width: 1.75rem;
+    height: 1.75rem;
+    font-size: 0.75rem;
+  }
+}

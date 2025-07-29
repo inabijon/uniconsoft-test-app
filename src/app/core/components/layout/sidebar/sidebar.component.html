@@ -1,1 +1,360 @@
-<p>sidebar works!</p>
+<aside class="h-[calc(100vh-80px)] flex flex-col overflow-y-auto">
+  <!-- Desktop Sidebar -->
+  @if (isDesktop) {
+    @if (!isCompact) {
+      <!-- Normal Full Sidebar -->
+      <div
+        class="flex flex-col w-64 bg-white/10 backdrop-blur-md border-r border-white/20 flex-1"
+      >
+        <div class="p-4 space-y-6 flex-1">
+          <!-- Create Button -->
+          <div class="w-full">
+            <div class="flex w-full">
+              <p-button
+                label="Hujjat yaratish"
+                iconPos="left"
+                class="flex-1"
+                styleClass="!rounded-r-none  w-full !border-r-0 flex-1"
+                severity="info"
+                (onClick)="createDocument('default')"
+              ></p-button>
+
+              <p-button
+                icon="pi pi-chevron-down"
+                class="!w-10"
+                styleClass="!rounded-l-none !w-10 !px-2"
+                severity="info"
+                (onClick)="showMenu($event)"
+              ></p-button>
+            </div>
+
+            <p-popover
+              #createDocumentPopover
+              styleClass="bg-white/20! backdrop-blur-md!  border border-white/30 rounded-lg shadow-xl"
+              [dismissable]="true"
+              appendTo="body"
+            >
+              <div>
+                @for (item of createDocumentItems; track item.label) {
+                  <a
+                    href="#"
+                    class="flex items-center gap-3 px-2.5 py-2 text-white rounded-lg hover:bg-white/20 transition-colors text-sm whitespace-nowrap"
+                    (click)="item.command(); createDocumentPopover.hide()"
+                  >
+                    @if (item.icon) {
+                      <i [class]="item.icon"></i>
+                    }
+                    <span>{{ item.label }}</span>
+                  </a>
+                }
+              </div>
+            </p-popover>
+          </div>
+
+          <!-- Navigation Menu -->
+          <div>
+            <nav class="space-y-1">
+              <!-- Dynamic menu groups -->
+              @for (group of menuGroups; track group.label) {
+                <div class="mb-6">
+                  @if (group.label) {
+                    <h3 class="text-white font-semibold mb-3 text-xs uppercase tracking-wide opacity-70">
+                      {{ group.label }}
+                    </h3>
+                  }
+                  <div class="space-y-1">
+                    <!-- Dynamic menu items for current group -->
+                    @for (item of group.menus; track item.id) {
+                      @if (!item.hasSubmenu) {
+                        <!-- Simple menu item -->
+                        <a
+                          href="#"
+                          class="flex items-center gap-3 px-3 py-2 text-white rounded-lg hover:bg-white/20 transition-colors"
+                          [ngClass]="{'bg-white/20': item.id === 'home'}"
+                          (click)="onMenuItemClick(item)"
+                        >
+                          @if (item.imageSrc) {
+                            <img [src]="item.imageSrc" alt="" class="w-5 h-5">
+                          } @else if (item.icon) {
+                            <i [class]="item.icon + ' w-5'"></i>
+                          }
+                          <span>{{ item.label }}</span>
+                        </a>
+                      } @else {
+                        <!-- Menu item with submenu -->
+                        <div>
+                          <button
+                            (click)="toggleSubmenu(item.id)"
+                            class="submenu-button w-full flex items-center justify-between gap-3 px-3 py-2 text-white rounded-lg transition-all duration-200"
+                          >
+                            <div class="flex items-center gap-3">
+                              @if (item.imageSrc) {
+                                <img [src]="item.imageSrc" alt="" class="w-5 h-5">
+                              } @else if (item.icon) {
+                                <i [class]="item.icon + ' w-5'"></i>
+                              }
+                              <span>{{ item.label }}</span>
+                            </div>
+                            <i
+                              [class]="isSubmenuVisible(item.id) ? 'pi pi-chevron-down chevron rotated' : 'pi pi-chevron-down chevron'"
+                              class="w-4 h-4">
+                            </i>
+                          </button>
+
+                          <!-- Submenu with animation -->
+                          <div
+                            class="submenu-container ml-8 mt-2"
+                            [class.submenu-enter]="!isSubmenuVisible(item.id)"
+                            [class.submenu-enter-active]="isSubmenuVisible(item.id)"
+                            [style.max-height]="isSubmenuVisible(item.id) ? '200px' : '0'"
+                            [style.opacity]="isSubmenuVisible(item.id) ? '1' : '0'"
+                          >
+                            <div class="space-y-1">
+                              @for (subItem of item.submenuItems; track subItem.label; let i = $index) {
+                                <a
+                                  href="#"
+                                  class="submenu-item flex items-center gap-3 px-3 py-2 text-white/80 rounded-lg transition-all duration-200 text-sm"
+                                  [style.animation-delay]="(i * 0.05) + 's'"
+                                  (click)="onSubmenuItemClick(subItem)"
+                                >
+                                  <i [class]="subItem.icon + ' w-4'"></i>
+                                  <span>{{ subItem.label }}</span>
+                                </a>
+                              }
+                            </div>
+                          </div>
+                        </div>
+                      }
+                    }
+                  </div>
+                </div>
+              }
+            </nav>
+          </div>
+
+        </div>
+      </div>
+    } @else {
+      <!-- Compact Icon-Only Sidebar -->
+      <div
+        class="flex flex-col bg-white/10 backdrop-blur-md border-r border-white/20 flex-1"
+      >
+        <div class="p-2 space-y-2 flex-1">
+          <!-- Compact Create Button -->
+          <div class="w-full">
+            <p-button
+              icon="pi pi-plus"
+              styleClass="!w-full !h-12 !rounded-lg"
+              severity="info"
+              (onClick)="showMenu($event)"
+              [pTooltip]="'Hujjat yaratish'"
+              tooltipPosition="right"
+            ></p-button>
+
+            <p-popover
+              #createDocumentPopover
+              styleClass="bg-white/95! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl"
+              [dismissable]="true"
+              appendTo="body"
+            >
+              <div class="p-2">
+                @for (item of createDocumentItems; track item.label) {
+                  <a
+                    href="#"
+                    class="flex items-center gap-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-blue-50 transition-colors text-sm whitespace-nowrap"
+                    (click)="item.command(); createDocumentPopover.hide()"
+                  >
+                    @if (item.icon) {
+                      <i [class]="item.icon"></i>
+                    }
+                    <span>{{ item.label }}</span>
+                  </a>
+                }
+              </div>
+            </p-popover>
+          </div>
+
+          <!-- Compact Navigation Menu -->
+          <div>
+            <nav class="space-y-2">
+              @for (item of ichkiHujjatlarItems; track item.id) {
+                <button
+                  class="w-full h-12 flex items-center justify-center text-white rounded-lg hover:bg-white/20 transition-colors relative"
+                  [ngClass]="{'bg-white/20': item.id === 'home'}"
+                  (click)="showCompactSubmenu($event, item)"
+                  [pTooltip]="item.label"
+                  tooltipPosition="right"
+                >
+                  @if (item.imageSrc) {
+                    <img [src]="item.imageSrc" alt="" class="w-6 h-6">
+                  } @else if (item.icon) {
+                    <i [class]="item.icon + ' text-lg'"></i>
+                  }
+                  @if (item.hasSubmenu) {
+                    <div class="absolute top-1 right-1 w-2 h-2 bg-blue-400 rounded-full"></div>
+                  }
+                </button>
+              }
+            </nav>
+          </div>
+
+          <!-- Compact Statistika Section -->
+          <div class="border-t border-white/20 pt-2 mt-4">
+            @for (item of statistikaItems; track item.id) {
+              <button
+                class="w-full h-12 flex items-center justify-center text-white rounded-lg hover:bg-white/20 transition-colors relative"
+                (click)="showCompactSubmenu($event, item)"
+                [pTooltip]="item.label"
+                tooltipPosition="right"
+              >
+                <i [class]="item.icon + ' text-lg'"></i>
+                @if (item.hasSubmenu) {
+                  <div class="absolute top-1 right-1 w-2 h-2 bg-green-400 rounded-full"></div>
+                }
+              </button>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Compact Submenu Overlay Panel -->
+      <p-popover
+        #compactSubmenuPanel
+        styleClass="bg-white/10! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl"
+        [dismissable]="true"
+        appendTo="body"
+      >
+        <div class="">
+          @for (item of currentCompactSubmenu; track item.label) {
+            <a
+              href="#"
+              class="flex items-center gap-2 py-2 px-2 text-white rounded-lg hover:bg-white/10 transition-colors text-sm"
+              (click)="onSubmenuItemClick(item); compactSubmenuPanel.hide()"
+            >
+            @if(item.icon) {
+              <i [class]="item.icon + ''"></i>
+            }
+              <span>{{ item.label }}</span>
+            </a>
+          }
+        </div>
+      </p-popover>
+    }
+  } @else {
+    <!-- Mobile/Tablet Sidebar (PrimeNG Sidebar Overlay) -->
+    <p-sidebar
+      [visible]="isMobileSidebarVisible"
+      (visibleChange)="onMobileSidebarVisibleChange($event)"
+      position="left"
+      [modal]="true"
+      styleClass="!bg-blue-900/95 !backdrop-blur-md !border-white/20"
+      [showCloseIcon]="true"
+    >
+      <div class="p-4 space-y-6 h-full overflow-y-auto">
+        <!-- Create Button -->
+        <div class="w-full">
+          <div class="flex w-full">
+            <p-button
+              label="Yaratish"
+              icon="pi pi-plus"
+              iconPos="left"
+              class="flex-1"
+              styleClass="!rounded-r-none !border-r-0 flex-1 !bg-blue-600 hover:!bg-blue-700"
+              (onClick)="createDocument('default')"
+            ></p-button>
+
+            <p-button
+              icon="pi pi-chevron-down"
+              class="!w-10"
+              styleClass="!rounded-l-none !w-10 !px-2 !bg-blue-600 hover:!bg-blue-700"
+              (onClick)="showMobileMenu($event)"
+            ></p-button>
+          </div>
+
+          <p-popover
+            #mobileCreateDocumentPopover
+            styleClass="bg-white/95! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl"
+            [dismissable]="true"
+            appendTo="body"
+          >
+            <div class="p-2">
+              @for (item of createDocumentItems; track item.label) {
+                <a
+                  href="#"
+                  class="flex items-center gap-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-blue-50 transition-colors text-sm whitespace-nowrap"
+                  (click)="item.command(); mobileCreateDocumentPopover.hide()"
+                >
+                  @if (item.icon) {
+                    <i [class]="item.icon"></i>
+                  }
+                  <span>{{ item.label }}</span>
+                </a>
+              }
+            </div>
+          </p-popover>
+        </div>
+
+        <!-- Navigation Menu -->
+        <div>
+          <nav class="space-y-1">
+            <!-- Dynamic mobile menu items -->
+            @for (item of mobileNavigationItems; track item.id) {
+              @if (!item.hasSubmenu) {
+                <!-- Simple mobile menu item -->
+                <a
+                  href="#"
+                  class="flex items-center gap-3 px-3 py-2 text-white rounded-lg hover:bg-white/20 transition-colors"
+                  [ngClass]="{'bg-white/20': item.id === 'home-mobile'}"
+                  (click)="item.action && item.action()"
+                >
+                  <i [class]="item.icon + ' w-5'"></i>
+                  <span>{{ item.label }}</span>
+                </a>
+              } @else {
+                <!-- Mobile menu item with submenu -->
+                <div>
+                  <button
+                    (click)="toggleSubmenu(item.id)"
+                    class="submenu-button w-full flex items-center justify-between gap-3 px-3 py-2 text-white rounded-lg transition-all duration-200"
+                  >
+                    <div class="flex items-center gap-3">
+                      <i [class]="item.icon + ' w-5'"></i>
+                      <span>{{ item.label }}</span>
+                    </div>
+                    <i
+                      [class]="isSubmenuVisible(item.id) ? 'pi pi-chevron-down chevron rotated' : 'pi pi-chevron-down chevron'"
+                      class="w-4 h-4">
+                    </i>
+                  </button>
+
+                  <!-- Mobile submenu with animation -->
+                  <div
+                    class="submenu-container ml-8 mt-2"
+                    [class.submenu-enter]="!isSubmenuVisible(item.id)"
+                    [class.submenu-enter-active]="isSubmenuVisible(item.id)"
+                    [style.max-height]="isSubmenuVisible(item.id) ? '200px' : '0'"
+                    [style.opacity]="isSubmenuVisible(item.id) ? '1' : '0'"
+                  >
+                    <div class="space-y-1">
+                      @for (subItem of item.submenuItems; track subItem.label; let i = $index) {
+                        <a
+                          href="#"
+                          class="submenu-item flex items-center gap-3 px-3 py-2 text-white/80 rounded-lg transition-all duration-200 text-sm"
+                          [style.animation-delay]="(i * 0.05) + 's'"
+                          (click)="subItem.command && subItem.command({})"
+                        >
+                          <i [class]="subItem.icon + ' w-4'"></i>
+                          <span>{{ subItem.label }}</span>
+                        </a>
+                      }
+                    </div>
+                  </div>
+                </div>
+              }
+            }
+          </nav>
+        </div>
+      </div>
+    </p-sidebar>
+  }
+</aside>

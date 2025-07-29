@@ -1,0 +1,83 @@
+<section class="w-full rounded-xl relative">
+  <section class="rounded-t-xl notes-header py-3 px-5">
+    <h2 class="text-lg font-semibold text-black">Notes</h2>
+  </section>
+
+  <section class="bg-white rounded-b-xl p-4 flex flex-col gap-1">
+    <div class="w-full bg-white rounded-t-none rounded-md relative">
+      <div
+        #editableDiv
+        contenteditable="true"
+        class="w-full min-h-[100px] p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        [class.placeholder]="isPlaceholderVisible"
+        (input)="onContentChange($event)"
+        (focus)="onFocus()"
+        (blur)="onBlur()"
+        style="direction: ltr; text-align: left; unicode-bidi: normal; writing-mode: horizontal-tb;"
+      ></div>
+      @if (isPlaceholderVisible) {
+        <div
+          class="absolute pointer-events-none text-gray-400 top-2 left-2"
+        >
+        </div>
+      }
+    </div>
+
+    <!-- Image upload input (hidden) -->
+    <input
+      #imageInput
+      type="file"
+      accept="image/*"
+      (change)="onImageSelected($event)"
+      class="hidden"
+    />
+
+    <section class="flex items-center justify-between bg-white">
+      <section class="flex items-center justify-start gap-5">
+        <!-- Text Bold Button -->
+        <button
+          (click)="toggleBold()"
+          [class.active]="isBoldActive"
+          class="font-bold text-2xl font-serif cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors"
+        >
+          <img src="./images/icons/editor/text.svg" alt="Bold" />
+        </button>
+
+        <!-- Add Image Button -->
+        <button
+          (click)="triggerImageUpload()"
+          class="font-bold text-2xl font-serif cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors"
+        >
+          <img src="./images/icons/editor/add_image.svg" alt="Add Image" />
+        </button>
+
+        <!-- Ordered List Button -->
+        <button
+          (click)="toggleOrderedList()"
+          [class.active]="isOrderedListActive"
+          class="font-bold text-2xl font-serif cursor-pointer hover:bg-gray-100 p-2 rounded transition-colors"
+        >
+          <img src="./images/icons/editor/order_list.svg" alt="Ordered List" />
+        </button>
+      </section>
+
+      <section class="flex items-center justify-end gap-5">
+        <!-- Delete Button -->
+        <button
+          (click)="clearAll()"
+          class="font-bold text-gray-400 text-2xl font-serif hover:text-red-600 transition-colors cursor-pointer p-2 rounded"
+        >
+          <i class="pi pi-trash text-lg"></i>
+        </button>
+
+        <!-- Save Button (optional functionality) -->
+        <button
+          (click)="saveNote()"
+          class="font-bold text-gray-400 text-2xl font-serif hover:text-green-600 transition-colors cursor-pointer p-2 rounded"
+        >
+          <i class="pi pi-save text-lg"></i>
+        </button>
+      </section>
+    </section>
+  </section>
+</section>
