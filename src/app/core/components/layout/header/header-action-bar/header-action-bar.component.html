@@ -148,4 +148,23 @@
   </div>
 
   <app-language-switcher/>
+
+  <div class="text-right flex items-center">
+    <button
+      type="button"
+      class="hover:bg-white/20 p-1 rounded-full transition-colors cursor-pointer"
+      (click)="settingsMenu.toggle($event)"
+      title="Sozlamalar"
+    >
+      <img src="./images/icons/gear.svg" alt="Settings" />
+    </button>
+
+    <p-overlayPanel #settingsMenu>
+      <div class="p-4">
+        <!-- Settings Content -->
+        <h6 class="text-sm font-semibold mb-3 text-gray-800">Sozlamalar</h6>
+        <p>Bu yerda kelajakda sozlamalar qo'shiladi.</p>
+      </div>
+    </p-overlayPanel>
+  </div>
 </section>
