@@ -153,15 +153,15 @@
 
             <p-popover
               #createDocumentPopover
-              styleClass="bg-white/95! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl"
+              styleClass="bg-white/10! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl"
               [dismissable]="true"
               appendTo="body"
             >
-              <div class="p-2">
+              <div class="py-2">
                 @for (item of createDocumentItems; track item.label) {
                   <a
                     href="#"
-                    class="flex items-center gap-3 px-3 py-2 text-gray-700 rounded-lg hover:bg-blue-50 transition-colors text-sm whitespace-nowrap"
+                    class="flex items-center gap-3 px-2 py-2 text-white rounded-lg hover:bg-white/20 transition-colors text-sm whitespace-nowrap"
                     (click)="item.command(); createDocumentPopover.hide()"
                   >
                     @if (item.icon) {
@@ -273,7 +273,7 @@
 
           <p-popover
             #mobileCreateDocumentPopover
-            styleClass="bg-white/95! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl"
+            styleClass="bg-white/10! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl"
             [dismissable]="true"
             appendTo="body"
           >

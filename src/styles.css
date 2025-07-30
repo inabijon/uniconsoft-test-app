@@ -3,6 +3,16 @@
 @plugin "tailwindcss-primeui";
 @import "primeicons/primeicons.css";
 
+/* Global CSS Variables for Settings */
+:root {
+  --app-font-size: 16px;
+}
+
+/* Apply font size globally */
+body {
+  font-size: var(--app-font-size);
+}
+
 /*============================================================== */
 /*============================================================== */
 /*================== FONTS ================================ */

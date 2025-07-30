@@ -97,13 +97,13 @@
       <img src="./images/icons/widget.svg" alt="Widgets" />
     </button>
 
-    <p-overlayPanel #widgetMenu [style]="{ width: '300px' }">
-      <div class="p-4">
+    <p-popover #widgetMenu styleClass="bg-white/10! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl">
+      <div class="p-4 ">
         <!-- Right Sidebar Toggle -->
         <div class="mb-4 pb-4 border-b border-gray-200">
-          <h6 class="text-sm font-semibold mb-3 text-gray-800">Widget Panel</h6>
+          <h6 class="text-sm font-semibold mb-3 text-white">Widget Panel</h6>
           <div class="flex items-center justify-between">
-            <span class="text-sm text-gray-600">Widget panelini ko'rsatish</span>
+            <span class="text-sm text-white">Widget panelini ko'rsatish</span>
             <p-checkbox
               [ngModel]="widgetService.getRightSidebarVisibility()"
               [binary]="true"
@@ -114,11 +114,11 @@
 
         <!-- Widget Configuration -->
         <div class="mb-4">
-          <h6 class="text-sm font-semibold mb-3 text-gray-800">Widgetlar</h6>
+          <h6 class="text-sm font-semibold mb-3 text-white">Widgetlar</h6>
           <div class="space-y-3">
             @for (widget of widgetService.getSortedWidgets(); track widget.id) {
               <div class="flex items-center justify-between">
-                <span class="text-sm text-gray-600">{{ widget.name }}</span>
+                <span class="text-sm text-white">{{ widget.name }}</span>
                 <p-checkbox
                   [ngModel]="widget.isVisible"
                   [binary]="true"
@@ -132,19 +132,19 @@
         <!-- Reset Button -->
         <div class="pt-3 border-t border-gray-200">
           <button
-            class="w-full px-3 py-2 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
+            class="w-full px-3 py-2 text-sm bg-primary-500 text-white rounded hover:bg-primary-600 transition-colors cursor-pointer"
             (click)="resetWidgets(); widgetMenu.hide()"
           >
             Standart holatga qaytarish
           </button>
         </div>
       </div>
-    </p-overlayPanel>
+    </p-popover>
   </div>
 
   <p-avatar image="./images/icons/avatar.svg" shape="circle" size="large" />
   <div class="text-white hidden md:block">
-    <div class="font-medium text-base">ABBOS XAZRATOV</div>
+    <div class="font-medium text-base">{{ userData.name | uppercase }}</div>
   </div>
 
   <app-language-switcher/>
@@ -156,14 +156,134 @@
       (click)="settingsMenu.toggle($event)"
       title="Sozlamalar"
     >
-      <img src="./images/icons/gear.svg" alt="Settings" />
+      <img src="./images/icons/gear.svg" class="w-6 h-6" alt="Settings" />
     </button>
 
-    <p-overlayPanel #settingsMenu>
-      <div class="p-4">
-        <!-- Settings Content -->
-        <h6 class="text-sm font-semibold mb-3 text-gray-800">Sozlamalar</h6>
-        <p>Bu yerda kelajakda sozlamalar qo'shiladi.</p>
+    <p-overlayPanel #settingsMenu styleClass="bg-white/10! backdrop-blur-md! border border-white/30 rounded-lg shadow-xl w-96">
+      <div class="p-6 max-h-96 overflow-y-auto settings-content">
+        <!-- Settings Header -->
+        <div class="mb-6">
+          <h4 class="text-lg font-bold text-white mb-2">Sozlamalar</h4>
+        </div>
+
+        <!-- Layout Settings -->
+        <div class="mb-6 settings-section">
+          <!-- Sidebar Mode -->
+          <div class="mb-4">
+            <div class="flex items-center justify-between">
+              <div class="flex flex-col">
+                <label class="text-sm text-white mb-1">Sidebar rejimi:</label>
+                <span class="text-xs text-white/70">
+                  {{ isSidebarOverlayMode ? 'Overlay' : 'Statik' }}
+                </span>
+              </div>
+              <div class="flex items-center justify-center gap-3">
+                <span class="text-xs text-white">Statik</span>
+                <p-inputSwitch
+                  [ngModel]="isSidebarOverlayMode"
+                  (onChange)="onSidebarModeToggle($event.checked)"
+                />
+                <span class="text-xs text-white">Overlay</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dark Mode Toggle -->
+          <div class="mb-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-white">Qorong'i rejim</span>
+              <p-checkbox
+                [ngModel]="getCurrentTheme().name === 'dark'"
+                [binary]="true"
+                (onChange)="setTheme(getCurrentTheme().name === 'dark' ? 'light' : 'dark')"
+              />
+            </div>
+          </div>
+
+          <!-- Font Size -->
+          <div class="mb-4">
+            <label class="block text-sm text-white mb-2">Matn o'lchami: {{fontSize()}}px</label>
+            <p-slider
+              [ngModel]="fontSize()"
+              [min]="12"
+              [max]="24"
+              [step]="2"
+              (onChange)="onFontSizeChange($event.value || 16)"
+              class="w-full"
+            />
+            <div class="flex justify-between text-xs text-white/70 mt-1">
+              <span>Kichik</span>
+              <span>Katta</span>
+            </div>
+          </div>
+        </div>
+
+        <p-divider />
+
+        <!-- Widget Settings -->
+        <div class="mb-6 settings-section">
+          <h6 class="text-sm font-semibold mb-3 text-white flex items-center">
+            🧩 Widget Sozlamalari
+          </h6>
+
+          <!-- Right Sidebar Toggle -->
+          <div class="mb-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-white">Widget panelini ko'rsatish</span>
+              <p-checkbox
+                [ngModel]="widgetService.getRightSidebarVisibility()"
+                [binary]="true"
+                (onChange)="toggleRightSidebar()"
+              />
+            </div>
+          </div>
+
+          <!-- Right Sidebar Settings Toggle -->
+          <div class="mb-4">
+            <div class="flex items-center justify-between">
+              <span class="text-sm text-white">O'ng panel sozlamalarini ko'rsatish</span>
+              <p-checkbox
+                [ngModel]="rightSidebarVisible()"
+                [binary]="true"
+                (onChange)="toggleRightSidebarSettings()"
+              />
+            </div>
+          </div>
+
+          <!-- Individual Widget Toggles -->
+          <div class="space-y-2">
+            @for (widget of widgetService.getSortedWidgets(); track widget.id) {
+              <div class="flex items-center justify-between">
+                <span class="text-sm text-white">{{ widget.name }}</span>
+                <p-checkbox
+                  [ngModel]="widget.isVisible"
+                  [binary]="true"
+                  (onChange)="toggleWidget(widget.id)"
+                />
+              </div>
+            }
+          </div>
+        </div>
+
+        <p-divider />
+
+
+
+        <!-- Screen Settings -->
+        <div class="mb-6 settings-section">
+          <h6 class="text-sm font-semibold mb-3 text-white flex items-center">
+            🖥️ Ekran Sozlamalari
+          </h6>
+          <div class="flex items-center justify-between">
+            <span class="text-sm text-white">To'liq ekran rejimi</span>
+            <p-checkbox
+              [ngModel]="isFullscreen()"
+              [binary]="true"
+              (onChange)="toggleFullscreen()"
+            />
+          </div>
+        </div>
+
       </div>
     </p-overlayPanel>
   </div>

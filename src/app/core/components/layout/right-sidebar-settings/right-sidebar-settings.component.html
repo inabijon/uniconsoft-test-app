@@ -1,14 +1,25 @@
-<div class="h-full w-full p-4">
-  <h3 class="text-white text-sm font-semibold mb-4">Settings</h3>
-  <div class="space-y-2">
-    <button class="w-full p-2 text-white/80 hover:text-white hover:bg-white/10 rounded text-left text-xs">
-      Theme
-    </button>
-    <button class="w-full p-2 text-white/80 hover:text-white hover:bg-white/10 rounded text-left text-xs">
-      Layout
-    </button>
-    <button class="w-full p-2 text-white/80 hover:text-white hover:bg-white/10 rounded text-left text-xs">
-      Widgets
-    </button>
-  </div>
+<div class="h-full w-full p-2 py-5 flex flex-col items-center justify-start gap-4">
+  <button class="bg-white/10 backdrop-blur-md rounded-full p-2 hover:bg-white/20 transition-colors cursor-pointer" type="button" aria-label="Notifications" (click)="onHandleNotificationClick()">
+    <img src="./images/icons/bell.svg" class="w-6 h-6" alt="">
+  </button>
+
+  <button class="bg-white/10 backdrop-blur-md rounded-full p-2 hover:bg-white/20 transition-colors cursor-pointer" type="button" aria-label="Calendar" (click)="onHandleCalendarClick()">
+    <img src="./images/icons/calendar.svg" class="w-6 h-6" alt="">
+  </button>
+
+  <button class="bg-white/10 backdrop-blur-md rounded-full p-2 hover:bg-white/20 transition-colors cursor-pointer" type="button" aria-label="User Info" (click)="onHandleUserInfoClick()">
+    <img src="./images/icons/user_info.svg" class="w-6 h-6" alt="">
+  </button>
+
+  <button class="bg-white/10 backdrop-blur-md rounded-full p-2 hover:bg-white/20 transition-colors cursor-pointer" type="button" aria-label="Document" (click)="onHandleDocumentClick()">
+    <img src="./images/icons/document.svg" class="w-6 h-6" alt="">
+  </button>
+
+  <button class="bg-white/10 backdrop-blur-md rounded-full p-2 hover:bg-white/20 transition-colors cursor-pointer" type="button" aria-label="Help" (click)="onHandleHelpClick()">
+    <img src="./images/icons/question_mark.svg" class="w-6 h-6" alt="">
+  </button>
+
+  <button class="bg-white/10 backdrop-blur-md rounded-full p-2 hover:bg-white/20 transition-colors cursor-pointer" type="button" aria-label="Chat" (click)="onHandleChatClick()">
+    <img src="./images/icons/chat.svg" class="w-6 h-6" alt="">
+  </button>
 </div>

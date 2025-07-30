@@ -3,12 +3,11 @@ import { Component, inject, Input, OnInit, ViewChild } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
-import { BrowserStorageService } from '../../services/browser-storage.service';
 import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-language-switcher',
-  imports: [MenuModule, ButtonModule, NgClass, UpperCasePipe, CommonModule],
+  imports: [MenuModule, ButtonModule, NgClass, CommonModule],
   templateUrl: './language-switcher.component.html',
   styleUrl: './language-switcher.component.css',
 })

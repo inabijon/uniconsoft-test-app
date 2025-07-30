@@ -50,51 +50,6 @@
     <main class="flex-1 flex">
       <!-- Router Outlet -->
       <div class="flex-1 overflow-y-auto p-6">
-        <!-- Test Controls -->
-        <div
-          class="mb-6 p-4 bg-white/10 backdrop-blur-md rounded-xl border border-white/20"
-        >
-          <h3 class="text-white mb-3 font-semibold">Sidebar Mode Test</h3>
-          <div class="flex gap-3">
-            <p-button
-              label="Overlay Mode"
-              severity="info"
-              (onClick)="layoutService.setOverlayMode()"
-              [outlined]="!layoutService.isOverlay()"
-            ></p-button>
-            <p-button
-              label="Static Mode"
-              severity="success"
-              (onClick)="layoutService.setStaticMode()"
-              [outlined]="layoutService.isOverlay()"
-            ></p-button>
-          </div>
-          <div class="mt-2 text-white/70 text-sm">
-            Current Mode:
-            {{ layoutService.isOverlay() ? "Overlay" : "Static" }} | Desktop
-            State:
-            @if (layoutService.isOverlay()) {
-              @if (layoutService.isDesktopSidebarFull()) {
-                <span class="text-green-300">Full</span>
-              } @else if (layoutService.isDesktopSidebarCompact()) {
-                <span class="text-yellow-300">Compact</span>
-              } @else if (layoutService.isDesktopSidebarHidden()) {
-                <span class="text-red-300">Hidden</span>
-              } @else {
-                <span class="text-blue-300">Unknown</span>
-              }
-            } @else {
-              @if (layoutService.isStaticSidebarVisible()) {
-                <span class="text-green-300">Visible</span>
-              } @else if (layoutService.isStaticSidebarHidden()) {
-                <span class="text-red-300">Hidden</span>
-              } @else {
-                <span class="text-blue-300">Normal</span>
-              }
-            }
-          </div>
-        </div>
-
         <router-outlet></router-outlet>
       </div>
 
@@ -106,7 +61,9 @@
           <app-widgets  />
         </aside>
       }
-      <section class="w-20 h-full bg-amber-900">
+
+      <!-- Right Sidebar Settings - Always visible but can be toggled via settings -->
+      <section class="w-14 h-full max-h-[calc(100vh-80px)] pb-5 bg-white/10 backdrop-blur-md border-l border-white/20 overflow-y-auto">
         <app-right-sidebar-settings />
       </section>
     </main>

@@ -1,0 +1,92 @@
+/* Font size variables */
+:host {
+  --app-font-size: 16px;
+}
+
+/* Settings panel scrollbar styling */
+.p-overlaypanel .p-overlaypanel-content {
+  padding: 0 !important;
+}
+
+/* Custom radio button styling */
+.p-radiobutton .p-radiobutton-box {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.p-radiobutton .p-radiobutton-box.p-highlight {
+  background: rgba(59, 130, 246, 0.8) !important;
+  border-color: rgba(59, 130, 246, 1) !important;
+}
+
+/* Custom checkbox styling */
+.p-checkbox .p-checkbox-box {
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  background: rgba(59, 130, 246, 0.8) !important;
+  border-color: rgba(59, 130, 246, 1) !important;
+}
+
+/* Custom slider styling */
+.p-slider .p-slider-range {
+  background: rgba(59, 130, 246, 0.8) !important;
+}
+
+.p-slider .p-slider-handle {
+  background: rgba(59, 130, 246, 1) !important;
+  border-color: rgba(59, 130, 246, 1) !important;
+}
+
+/* Divider styling */
+.p-divider .p-divider-content {
+  background: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Theme button styling */
+.theme-option {
+  transition: all 0.2s ease;
+}
+
+.theme-option:hover {
+  transform: scale(1.05);
+}
+
+/* Settings section spacing */
+.settings-section {
+  margin-bottom: 1.5rem;
+}
+
+.settings-section:last-child {
+  margin-bottom: 0;
+}
+
+/* Custom button styling for reset actions */
+.reset-button {
+  transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Scrollbar styling for settings panel */
+.settings-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.settings-content::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.settings-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.settings-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
